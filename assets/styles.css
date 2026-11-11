@@ -188,6 +188,13 @@ section h2{font-size:clamp(23px,6vw,31px);margin-bottom:4px}
 .shot{margin-top:24px;border:var(--bw) solid var(--line);border-radius:0;padding:10px;
   background:var(--shot-bg);box-shadow:none}
 .shot img{display:block;width:100%;border-radius:0}
+/* 画面イメージのプレースホルダ（実画面の差し替えまで） */
+.shot.ph{aspect-ratio:4/3;display:grid;place-items:center;padding:0;
+  background:var(--shot-bg);border:var(--bw) solid var(--line)}
+.shot.ph span{font-family:var(--font-head);font-weight:500;font-size:14px;
+  color:var(--muted);text-align:center;line-height:2.1;letter-spacing:.12em}
+.worker .shot.ph{background:var(--on-dark-surface);border-color:var(--on-dark-line)}
+.worker .shot.ph span{color:var(--on-dark-sub)}
 .cap{font-size:11px;color:var(--muted);margin-top:10px;text-align:left;line-height:1.8}
 
 /* --- 06 利用の流れ：ここだけは本当に順序なので番号を残す --- */
