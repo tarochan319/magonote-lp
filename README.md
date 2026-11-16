@@ -141,7 +141,7 @@ LP上で次のとおり表明しています（NF-LP-06-1）。
 
 | やりたいこと | 触る場所 |
 |---|---|
-| 色・角丸・影・余白を変える | `assets/styles.css` 先頭の `:root` |
+| 色・角丸・影・余白を変える | `assets/styles.css` 先頭の `:root`（配色の一覧と注意点は [COLORS.md](COLORS.md)） |
 | 文言を変える | `index.html`（各セクションにコメントで要件IDを入れています） |
 | 設問を増減する／選択肢を変える | `assets/app.js` の `SCHEMA` |
 | 記録する列を変える | `apps-script/Code.gs` の `COLUMNS` と `doPost` の `row` |

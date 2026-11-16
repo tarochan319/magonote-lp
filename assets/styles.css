@@ -1,40 +1,50 @@
 /* ============================================================
-   まごのて 需要検証LP  ―  A案「染付」
-   伊万里焼の白磁と染付の藍。塗り面は料金セクションだけ。
-   赤絵（朱）はページ内で一度しか使いません。
+   まごのて 需要検証LP  ―  案3「染付の器」
+   真っ白な地（#FFFFFF）に、金で縁取った藍の面（＝器）を並べる。
+   金は3段階に使い分ける。白地の小さな文字は濃い金、白地の大きな
+   数字と罫は中間の金、藍の面の上は明るい金（COLORS.md 参照）。
+   赤絵（朱）はページ内で一度しか使わない。
    色・形・文字サイズの調整は :root のトークンを書き換えるだけで済みます
    ============================================================ */
 :root{
   /* --- レイアウト --- */
-  --maxw:min(90vw,34rem); --gut:20px; --sec:56px; --lh:1.95; --lh-head:1.38;
+  --maxw:min(90vw,34rem); --gut:20px; --sec:52px; --lh:1.95; --lh-head:1.38;
 
   /* --- 書体 --- */
   --font-head:"Zen Old Mincho",serif;
   --font-body:"Zen Kaku Gothic New",system-ui,-apple-system,sans-serif;
   --fw-head:600; --ls-head:.015em;
 
-  /* --- 地の色（白磁） --- */
-  --bg:#F7F7F4; --bg-alpha:rgba(247,247,244,.94); --surface:#FFFFFF; --band:#EFEFEB;
-  --ink:#191A1C; --muted:#5A6273; --line:#D7DAD6; --line-strong:#C3C7C2;
+  /* --- 地の色 --- */
+  --bg:#FFFFFF; --bg-alpha:rgba(255,255,255,.94); --surface:#FFFFFF; --band:#F4F4F1;
+  --ink:#1A1C20; --muted:#5A6273; --line:#E6E8E5; --line-strong:#D5D8D3;
 
   /* --- 主アクセント（染付の藍） --- */
-  --accent:#1E3A6E; --accent-dk:#101F3C; --accent-lt:#EBEFF5; --on-accent:#FFFFFF;
+  --accent:#1E3A6E; --accent-dk:#101F3C; --accent-lt:#EDF1F7; --on-accent:#FFFFFF;
   /* --- 副アクセント（赤絵の朱）※ 使うのは一箇所だけ --- */
   --accent-2:#B5362B; --accent-2-lt:#F6EDEC;
 
+  /* --- 金（金襴手） --- */
+  --gold:#B8912F;        /* 白地の大きな数字・罫 */
+  --gold-ink:#8A6B1F;    /* 白地の小さな文字 */
+  --gold-lt:#D4B45F;     /* 藍の面の上 */
+  --gold-hair:#E0CE9B;   /* 白地のヘアライン */
+  --gold-frame:rgba(212,180,95,.55);  /* 器の内枠 */
+  --gold-rule:rgba(212,180,95,.35);   /* 器の中の仕切り */
+
   /* --- 濃色面 --- */
-  --dark:#1E3A6E;        /* 料金：ページ唯一の強い面 */
-  --dark-2:#101F3C;      /* 働き手向け：静かに沈める面 */
-  --on-dark:#FFFFFF; --on-dark-mut:#B9C8DD; --on-dark-sub:#8FA2BC;
-  --on-dark-line:rgba(255,255,255,.26); --on-dark-em:#FFFFFF;
+  --dark:#1E3A6E;        /* 器の地 */
+  --dark-2:#101F3C;      /* 働き手向けセクション */
+  --on-dark:#FFFFFF; --on-dark-mut:#B9C8DD; --on-dark-sub:#9FB2C9;
+  --on-dark-line:rgba(255,255,255,.22); --on-dark-em:#D4B45F;
   --on-dark-surface:rgba(255,255,255,.06);
 
   /* --- 部品 --- */
-  --logo:#191A1C; --pill-ink:#5A6273; --pill-bg:transparent; --pill-line:#D7DAD6;
+  --logo:#1E3A6E; --pill-ink:#5A6273; --pill-bg:transparent; --pill-line:#E0CE9B;
   --r:0; --r-sm:0; --r-ic:0; --r-btn:0; --bw:1px; --bw-opt:1px;
   --sh:none; --sh-card:none; --btn-sh:none;
   --btn-inv-bg:#FFFFFF; --btn-inv-ink:#101F3C;
-  --shot-bg:#EFEFEB; --big-ink:#FFFFFF;
+  --shot-bg:#F4F4F1; --big-ink:#FFFFFF;
 
   /* --- 状態色 --- */
   --danger:#A3372C; --danger-lt:#FBEEEC;
@@ -53,22 +63,30 @@ img{max-width:100%}
 h1,h2,h3{margin:0;line-height:var(--lh-head);font-family:var(--font-head);
   font-weight:var(--fw-head);letter-spacing:var(--ls-head)}
 section{padding:var(--sec) 0}
-.lead{font-size:14px;color:var(--muted);line-height:1.95;margin:24px 0 0;max-width:30em}
+.lead{font-size:14px;color:var(--muted);line-height:1.95;margin:22px 0 0;max-width:30em}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
+/* ============================================================
+   器：金で縁取った藍の面。この案の基本単位
+   ============================================================ */
+.stats,.worry,.ptable{
+  background:var(--dark);color:var(--on-dark);position:relative;
+  padding:26px 22px;margin-top:24px;border:0;border-radius:0;overflow:visible;box-shadow:none}
+.stats::before,.worry::before,.ptable::before{
+  content:"";position:absolute;inset:7px;border:1px solid var(--gold-frame);pointer-events:none}
+
 /* --- セクション見出し --- */
-.sh{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
-.sh .no{font-size:11.5px;font-weight:700;color:var(--accent);letter-spacing:.14em;
+.sh{display:flex;align-items:baseline;gap:11px;margin-bottom:14px}
+.sh .no{font-size:12px;font-weight:600;color:var(--gold-ink);letter-spacing:.16em;
   font-variant-numeric:tabular-nums;font-family:var(--font-head)}
-.sh .lb{font-size:11.5px;font-weight:400;color:var(--muted);letter-spacing:.1em;font-family:var(--font-head)}
-/* 見出し（旧版の h2 インライン指定は index.html から外し、ここに集約） */
-section h2{font-size:clamp(23px,6vw,31px);margin-bottom:4px}
+.sh .lb{font-size:12px;font-weight:400;color:var(--muted);letter-spacing:.1em;font-family:var(--font-head)}
+section h2{font-size:clamp(23px,6vw,31px);margin-bottom:4px;color:var(--accent)}
 
 /* --- ヘッダー --- */
 .site{position:sticky;top:0;z-index:30;background:var(--bg-alpha);backdrop-filter:blur(10px);
-  border-bottom:var(--bw) solid var(--line)}
+  border-bottom:var(--bw) solid var(--gold-hair)}
 .site .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
 .logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:19px;
   color:var(--logo);font-family:var(--font-head);letter-spacing:.06em}
@@ -76,107 +94,94 @@ section h2{font-size:clamp(23px,6vw,31px);margin-bottom:4px}
 .pill{font-size:11.5px;font-weight:400;color:var(--pill-ink);border:0;
   background:var(--pill-bg);padding:0;border-radius:0;letter-spacing:.1em}
 
-/* --- ヒーロー：白磁の上に、見出しそのものを絵として置く --- */
-.hero{background:var(--bg);color:var(--ink);border-top:0;padding:40px 0 52px}
+/* --- ヒーロー --- */
+.hero{background:var(--bg);color:var(--ink);border-top:0;padding:36px 0 48px}
 .hero .kicker{display:inline-block;font-size:11.5px;font-weight:400;letter-spacing:.12em;
-  border:0;border-bottom:var(--bw) solid var(--line);padding:0 0 7px;border-radius:0;
-  margin-bottom:26px;font-family:var(--font-head);color:var(--muted)}
-.hero h1{font-size:clamp(23px,6.2vw,46px);line-height:1.34;color:var(--ink);font-weight:700}
-/* 一語だけ色を変える装飾はやめ、字面で読ませる */
+  border:0;border-bottom:var(--bw) solid var(--gold-hair);padding:0 0 7px;border-radius:0;
+  margin-bottom:24px;font-family:var(--font-head);color:var(--muted)}
+.hero h1{font-size:clamp(23px,6.2vw,50px);line-height:1.3;color:var(--accent);font-weight:700}
 .hero h1 em{font-style:normal;color:inherit}
-.hero p{font-size:15px;color:#2C3240;line-height:1.95;margin:24px 0 0;max-width:30em}
+.hero p{font-size:15px;color:#2C3240;line-height:1.95;margin:22px 0 0;max-width:30em}
 
-/* 統計：塗らずに罫だけで置く */
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;background:none;
-  margin-top:30px;border:0;border-top:var(--bw) solid var(--accent);border-radius:0;overflow:visible}
-.stats div{background:none;padding:16px 0 14px}
-.stats .v{font-size:27px;font-weight:600;color:var(--ink);line-height:1.2;
+/* 統計：器のひとつ */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.stats div{background:none;padding:0}
+.stats .v{font-size:26px;font-weight:600;color:var(--gold-lt);line-height:1.2;
   font-variant-numeric:tabular-nums;font-family:var(--font-head)}
 .stats .v small{font-size:13px;font-weight:600;margin-left:2px}
-.stats .k{font-size:11.5px;color:var(--muted);line-height:1.7;margin-top:6px}
-.src{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.7;
-  border-top:var(--bw) solid var(--line);padding-top:10px}
+.stats .k{font-size:11.5px;color:var(--on-dark-mut);line-height:1.7;margin-top:6px}
+.src{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.7}
 
-/* --- ボタン --- */
+/* --- ボタン：藍の面に金の内枠 --- */
 .btn{display:block;width:100%;text-align:center;background:var(--accent);color:var(--on-accent);
   font-family:var(--font-head);font-weight:600;font-size:17px;letter-spacing:.08em;
   padding:19px 16px;border-radius:var(--r-btn);text-decoration:none;border:0;cursor:pointer;
-  line-height:1.5;box-shadow:var(--btn-sh)}
+  line-height:1.5;box-shadow:inset 0 0 0 1px var(--accent),inset 0 0 0 2px var(--gold-frame)}
 .btn:hover{background:var(--accent-dk)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
-.btn.inv{background:var(--btn-inv-bg);color:var(--btn-inv-ink)}
+.btn.inv{background:var(--btn-inv-bg);color:var(--btn-inv-ink);
+  box-shadow:inset 0 0 0 1px var(--btn-inv-bg),inset 0 0 0 2px rgba(184,145,47,.5)}
 .btn.inv:hover{background:#fff}
 .btn.sub{background:transparent;color:var(--accent);border:var(--bw) solid var(--accent);
-  font-size:14.5px;padding:15px 16px}
+  font-size:14.5px;padding:15px 16px;box-shadow:none}
 .btn.sub:hover{background:var(--accent-lt)}
 .btn-note{font-size:12px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.8}
 .hero .btn-note{color:var(--muted);text-align:left}
 
-/* --- 01 共感：箱に入れず、藍の罫だけで切る --- */
-.worry{border:0;border-top:var(--bw) solid var(--accent);border-radius:0;overflow:visible;
-  margin-top:24px;background:none;box-shadow:none}
-.worry div{padding:19px 0;font-size:16.5px;border-bottom:var(--bw) solid var(--line);
-  display:flex;gap:11px;line-height:1.85;font-family:var(--font-head);font-weight:500}
-.worry div:last-child{border-bottom:var(--bw) solid var(--line)}
-.worry div b{color:var(--muted);font-weight:400;flex:0 0 auto;font-size:15px;line-height:1.9}
+/* --- 01 共感：器のひとつ --- */
+.worry div{padding:15px 0;font-size:16.5px;border-bottom:var(--bw) solid var(--gold-rule);
+  display:flex;gap:11px;line-height:1.8;font-family:var(--font-head);font-weight:500}
+.worry div:first-child{padding-top:0}
+.worry div:last-child{border-bottom:0;padding-bottom:0}
+.worry div b{color:var(--gold-lt);font-weight:400;flex:0 0 auto;font-size:15px;line-height:1.9}
 
-/* --- 02 できること：品書きのように --- */
-.cdtable{border:0;border-top:var(--bw) solid var(--accent);border-radius:0;overflow:visible;
+/* --- 02 できること：白地の品書き。上辺だけ金の罫 --- */
+.cdtable{border:0;border-top:var(--bw) solid var(--gold-hair);border-radius:0;overflow:visible;
   margin-top:24px;background:none;box-shadow:none}
-.cdrow{display:grid;grid-template-columns:26px 1fr auto;align-items:center;gap:14px;padding:16px 0;
+.cdrow{display:grid;grid-template-columns:26px 1fr auto;align-items:center;gap:14px;padding:15px 0;
   border-bottom:var(--bw) solid var(--line)}
-.cdrow:last-child{border-bottom:var(--bw) solid var(--line)}
-.cdrow .ic{width:24px;height:24px;border-radius:0;background:none;
-  display:grid;place-items:center}
+.cdrow .ic{width:24px;height:24px;border-radius:0;background:none;display:grid;place-items:center}
 .cdrow .ic svg{stroke:var(--accent)}
 .cdrow b{font-size:17px;font-weight:var(--fw-head);font-family:var(--font-head)}
 .cdrow span{font-size:12px;color:var(--muted);line-height:1.7;text-align:right}
 
-/* --- 03 料金：ページ唯一の塗り面。ここだけ声を張る --- */
-.price{background:var(--dark);color:var(--on-dark);padding:62px 0 58px}
-.price h2,.price h2[style]{color:var(--on-dark)}
-.price .sh .no{color:var(--on-dark)}
-.price .sh .lb{color:var(--on-dark-sub)}
-.price .lead{color:var(--on-dark-mut)}
-.ptable{margin-top:32px;border:0;border-radius:0;overflow:visible;
-  background:none;box-shadow:none}
-.ptable .hd{display:grid;grid-template-columns:1fr 1fr;background:none;color:var(--on-dark-mut);
-  gap:1px}
-.ptable .hd div{padding:0 0 8px;font-size:11.5px;font-weight:400;text-align:left;
-  letter-spacing:.1em;border-right:0}
+/* --- 03 料金：白地の上に、大きな器をひとつ --- */
+.price{background:var(--bg)}
+.price .lead{color:var(--muted)}
+.ptable{padding:30px 24px;margin-top:24px}
+.ptable .hd{display:grid;grid-template-columns:1fr 1fr;background:none;color:var(--gold-lt);gap:16px}
+.ptable .hd div{padding:0 0 6px;font-size:11px;font-weight:400;text-align:left;
+  letter-spacing:.04em;border-right:0;line-height:1.6}
 .ptable .hd div:first-child{border-right:0}
-.ptable .bd{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--on-dark-line)}
-.ptable .bd>div{padding:20px 16px 20px 0;text-align:left;background:var(--dark)}
-.ptable .bd>div:first-child{border-right:0;padding-right:20px}
-.ptable .bd>div:last-child{padding-left:20px}
-.ptable .bd .big{font-size:23px;font-weight:var(--fw-head);color:var(--big-ink);line-height:1.45;
-  font-family:var(--font-head)}
-.ptable .bd .sub{font-size:12px;color:var(--on-dark-mut);margin-top:8px;line-height:1.8}
-.arrowrow{display:flex;align-items:center;justify-content:flex-start;gap:9px;padding:22px 0 14px;
-  background:none;font-size:11.5px;font-weight:400;color:var(--on-dark-mut);
-  letter-spacing:.1em;border-top:0;border-bottom:0}
-.arrowrow svg{stroke:var(--on-dark-mut)}
+.ptable .bd{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ptable .bd>div{padding:0;text-align:left;background:none;border-right:0}
+.ptable .bd .big{font-size:clamp(19px,5.2vw,24px);font-weight:var(--fw-head);color:var(--big-ink);
+  line-height:1.45;font-family:var(--font-head)}
+.ptable .bd .sub{font-size:12.5px;color:var(--on-dark-mut);margin-top:6px;line-height:1.8}
+.arrowrow{display:flex;align-items:center;justify-content:flex-start;gap:9px;
+  padding:26px 0 0;margin-top:26px;background:none;font-size:11.5px;font-weight:400;
+  color:var(--gold-lt);letter-spacing:.12em;border-top:var(--bw) solid var(--gold-rule);border-bottom:0}
+.arrowrow svg{stroke:var(--gold-lt)}
 /* 金額：赤絵の点が置かれるのは、ページ内でここ一箇所だけ */
-.tipgrid{display:flex;flex-wrap:wrap;gap:0 26px;background:none;
-  border-top:0;border-bottom:0;padding-bottom:4px}
-.tipgrid div{background:none;padding:6px 0 14px;text-align:left;
-  font-size:clamp(20px,5.6vw,27px);font-weight:500;color:var(--on-dark);
+.tipgrid{display:flex;flex-wrap:wrap;gap:4px 26px;background:none;
+  border-top:0;border-bottom:0;margin-top:14px}
+.tipgrid div{background:none;padding:6px 0 12px;text-align:left;
+  font-size:clamp(21px,5.6vw,28px);font-weight:500;color:var(--gold-lt);
   font-family:var(--font-head);font-variant-numeric:tabular-nums;position:relative}
-.tipgrid div.on{background:none;color:var(--on-dark)}
-.tipgrid div.on::after{content:"";position:absolute;left:50%;bottom:4px;transform:translateX(-50%);
-  width:7px;height:7px;border-radius:50%;background:var(--accent-2)}
+.tipgrid div.on{background:none;color:var(--gold-lt)}
+.tipgrid div.on::after{content:"";position:absolute;left:50%;bottom:2px;transform:translateX(-50%);
+  width:6px;height:6px;border-radius:50%;background:var(--accent-2)}
 .tipcap{font-size:12px;color:var(--on-dark-mut);text-align:left;padding:14px 0 0;
-  background:none;line-height:1.85;border-top:var(--bw) solid var(--on-dark-line)}
+  background:none;line-height:1.85}
 .freenote{margin-top:22px;background:none;border:0;
-  border-left:2px solid var(--on-dark-line);border-radius:0;padding:2px 0 2px 16px;
-  font-size:13px;color:var(--on-dark-mut);line-height:1.95}
-.freenote b{color:var(--on-dark);font-weight:600}
+  border-left:2px solid var(--gold);border-radius:0;padding:2px 0 2px 16px;
+  font-size:13px;color:var(--ink);line-height:1.95}
+.freenote b{color:var(--gold-ink);font-weight:600}
 
-/* --- 04 安心材料 --- */
-.trust{margin-top:24px;border:0;border-top:var(--bw) solid var(--accent);border-radius:0;
+/* --- 04 安心材料：白地 --- */
+.trust{margin-top:24px;border:0;border-top:var(--bw) solid var(--gold-hair);border-radius:0;
   overflow:visible;background:none;box-shadow:none}
-.trust .t{padding:19px 0;border-bottom:var(--bw) solid var(--line);display:flex;gap:14px}
-.trust .t:last-child{border-bottom:var(--bw) solid var(--line)}
+.trust .t{padding:18px 0;border-bottom:var(--bw) solid var(--line);display:flex;gap:14px}
 .trust .t .ic{width:22px;height:22px;border-radius:0;background:none;
   display:grid;place-items:center;flex:0 0 22px;margin-top:4px}
 .trust .t .ic svg{stroke:var(--accent)}
@@ -185,25 +190,24 @@ section h2{font-size:clamp(23px,6vw,31px);margin-bottom:4px}
 .trust .t p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.9}
 
 /* --- 05 画面イメージ --- */
-.shot{margin-top:24px;border:var(--bw) solid var(--line);border-radius:0;padding:10px;
+.shot{margin-top:24px;border:var(--bw) solid var(--gold-hair);border-radius:0;padding:10px;
   background:var(--shot-bg);box-shadow:none}
 .shot img{display:block;width:100%;border-radius:0}
 /* 画面イメージのプレースホルダ（実画面の差し替えまで） */
 .shot.ph{aspect-ratio:4/3;display:grid;place-items:center;padding:0;
-  background:var(--shot-bg);border:var(--bw) solid var(--line)}
+  background:var(--shot-bg);border:var(--bw) solid var(--gold-hair)}
 .shot.ph span{font-family:var(--font-head);font-weight:500;font-size:14px;
   color:var(--muted);text-align:center;line-height:2.1;letter-spacing:.12em}
-.worker .shot.ph{background:var(--on-dark-surface);border-color:var(--on-dark-line)}
+.worker .shot.ph{background:var(--on-dark-surface);border-color:var(--gold-frame)}
 .worker .shot.ph span{color:var(--on-dark-sub)}
 .cap{font-size:11px;color:var(--muted);margin-top:10px;text-align:left;line-height:1.8}
 
 /* --- 06 利用の流れ：ここだけは本当に順序なので番号を残す --- */
-.flow{margin-top:24px;border:0;border-top:var(--bw) solid var(--accent);border-radius:0;
+.flow{margin-top:24px;border:0;border-top:var(--bw) solid var(--gold-hair);border-radius:0;
   overflow:visible;background:none;box-shadow:none}
 .fl{display:grid;grid-template-columns:34px 1fr;border-bottom:var(--bw) solid var(--line)}
-.fl:last-child{border-bottom:var(--bw) solid var(--line)}
 .fl .n{background:none;display:block;padding-top:19px;font-size:12px;font-weight:600;
-  color:var(--accent);font-variant-numeric:tabular-nums;font-family:var(--font-head);
+  color:var(--gold-ink);font-variant-numeric:tabular-nums;font-family:var(--font-head);
   letter-spacing:.08em}
 .fl .c{padding:17px 0}
 .fl b{display:block;font-size:16px;font-weight:var(--fw-head);margin-bottom:4px;
@@ -213,17 +217,18 @@ section h2{font-size:clamp(23px,6vw,31px);margin-bottom:4px}
 /* ============================================================
    07 アンケートフォーム
    ============================================================ */
-.formcard{border:var(--bw) solid var(--line);border-radius:0;padding:26px 22px;margin-top:26px;
+.formcard{border:var(--bw) solid var(--gold-hair);border-radius:0;padding:26px 22px;margin-top:24px;
   background:var(--surface);box-shadow:none}
 /* 固定ヘッダー(58px)に進捗バーが隠れないようにする */
 #form{scroll-margin-top:58px}
 #surveyCard{scroll-margin-top:74px}
 .prog{display:flex;gap:5px;margin-bottom:18px}
-.prog i{height:2px;flex:1;background:var(--line);border-radius:0;transition:background .2s}
-.prog i.on{background:var(--accent)}
-.stepno{font-size:11.5px;font-weight:400;color:var(--muted);letter-spacing:.12em;margin-bottom:10px;
+.prog i{height:3px;flex:1;background:var(--line);border-radius:0;transition:background .2s}
+.prog i.on{background:var(--gold)}
+.stepno{font-size:11.5px;font-weight:400;color:var(--gold-ink);letter-spacing:.12em;margin-bottom:10px;
   font-family:var(--font-head)}
-.q{font-size:19px;font-weight:var(--fw-head);margin-bottom:6px;line-height:1.6;font-family:var(--font-head)}
+.q{font-size:19px;font-weight:var(--fw-head);margin-bottom:6px;line-height:1.6;
+  font-family:var(--font-head);color:var(--accent)}
 .qhint{font-size:12px;color:var(--muted);margin:0 0 14px;line-height:1.85}
 .q + .opts, .qhint + .opts{margin-top:12px}
 
@@ -232,7 +237,7 @@ section h2{font-size:clamp(23px,6vw,31px);margin-bottom:4px}
 .opt{display:flex;align-items:center;gap:12px;border:var(--bw-opt) solid var(--line);
   border-radius:0;padding:16px;margin-bottom:9px;font-size:15px;cursor:pointer;
   background:var(--surface);transition:border-color .15s,background .15s}
-.opt:hover{border-color:var(--accent)}
+.opt:hover{border-color:var(--gold)}
 .opt input{position:absolute;opacity:0;width:0;height:0}
 .opt .r{width:18px;height:18px;border-radius:50%;border:1.6px solid var(--muted);flex:0 0 18px;opacity:.55}
 .opt .c{width:18px;height:18px;border:1.6px solid var(--muted);flex:0 0 18px;opacity:.55;position:relative}
@@ -264,41 +269,39 @@ section h2{font-size:clamp(23px,6vw,31px);margin-bottom:4px}
 /* 完了画面 */
 .done{display:none;text-align:left;padding:12px 0 4px}
 .done.show{display:block}
-.done .mark{width:46px;height:46px;border:var(--bw) solid var(--accent);border-radius:50%;
+.done .mark{width:46px;height:46px;border:var(--bw) solid var(--gold);border-radius:50%;
   display:grid;place-items:center;margin:0 0 20px}
-.done h3{font-size:21px;margin-bottom:14px}
+.done h3{font-size:21px;margin-bottom:14px;color:var(--accent)}
 .done p{font-size:13.5px;color:var(--muted);line-height:1.95;margin:0 0 12px}
 .done .del{margin-top:20px;text-align:left}
 
-/* --- 08 働き手向け：静かに沈める面 --- */
+/* --- 08 働き手向け：ページで唯一の全面の藍 --- */
 .worker{background:var(--dark-2);color:var(--on-dark)}
-.worker h2,.worker h2[style]{color:var(--on-dark)}
-.worker .sh .no{color:var(--on-dark)}
+.worker h2{color:var(--on-dark)}
+.worker .sh .no{color:var(--gold-lt)}
 .worker .sh .lb{color:var(--on-dark-sub)}
 .worker .lead{color:var(--on-dark-mut)}
-.wlist{margin-top:24px;border:0;border-top:var(--bw) solid var(--on-dark-line);
+.wlist{margin-top:24px;border:0;border-top:var(--bw) solid var(--gold-frame);
   border-radius:0;overflow:visible}
-.wlist div{padding:18px 0;border-bottom:var(--bw) solid var(--on-dark-line);font-size:16px;
+.wlist div{padding:17px 0;border-bottom:var(--bw) solid var(--on-dark-line);font-size:16px;
   display:flex;gap:12px;line-height:1.85;font-family:var(--font-head);font-weight:500}
-.wlist div:last-child{border-bottom:var(--bw) solid var(--on-dark-line)}
-.wlist div b{color:var(--on-dark-sub);font-weight:400;font-size:12px;flex:0 0 auto;line-height:2.4;
+.wlist div b{color:var(--gold-lt);font-weight:400;font-size:12px;flex:0 0 auto;line-height:2.4;
   font-variant-numeric:tabular-nums}
-.worker .shot{background:var(--on-dark-surface);border-color:var(--on-dark-line);box-shadow:none}
+.worker .shot{background:var(--on-dark-surface);border-color:var(--gold-frame);box-shadow:none}
 .worker .cap{color:var(--on-dark-sub)}
 .worker .btn-note{color:var(--on-dark-sub)}
 
 /* --- 注意書き・ポリシー --- */
 .notice{background:var(--band)}
-.notice h3{font-size:15px;margin-bottom:14px}
+.notice h3{font-size:15px;margin-bottom:14px;color:var(--accent)}
 .notice p{font-size:12.5px;color:var(--muted);line-height:1.95;margin:0 0 12px;max-width:34em}
-.del{background:var(--surface);border:0;border-left:2px solid var(--accent);
+.del{background:none;border:0;border-left:2px solid var(--gold);
   border-radius:0;padding:4px 0 4px 16px;font-size:12.5px;color:var(--ink);line-height:1.95}
-.notice .del{background:none}
-.policy{margin-top:24px;border:0;border-top:var(--bw) solid var(--line-strong);background:none}
+.policy{margin-top:24px;border:0;border-top:var(--bw) solid var(--gold-hair);background:none}
 .policy > summary{padding:16px 0;font-size:13px;font-weight:600;cursor:pointer;
   font-family:var(--font-head);list-style:none;display:flex;justify-content:space-between;align-items:center}
 .policy > summary::-webkit-details-marker{display:none}
-.policy > summary::after{content:"＋";color:var(--accent);font-weight:400}
+.policy > summary::after{content:"＋";color:var(--gold-ink);font-weight:400}
 .policy[open] > summary::after{content:"−"}
 .policy .pbody{padding:4px 0 20px;border-top:var(--bw) solid var(--line)}
 .policy h4{font-size:12.5px;margin:20px 0 6px;font-family:var(--font-head);font-weight:600}
@@ -309,7 +312,8 @@ section h2{font-size:clamp(23px,6vw,31px);margin-bottom:4px}
 .todo{color:var(--danger);font-weight:700}
 
 @media (min-width:640px){
-  :root{--gut:26px;--sec:72px;--maxw:min(92vw,46rem)}
-  .hero{padding:58px 0 76px}
+  :root{--gut:26px;--sec:68px;--maxw:min(92vw,46rem)}
+  .hero{padding:52px 0 70px}
   body{font-size:16px}
+  .ptable{padding:34px 30px}
 }
